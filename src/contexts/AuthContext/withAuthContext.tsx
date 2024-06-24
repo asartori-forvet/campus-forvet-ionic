@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import AuthContextProvider from './AuthContextProvider';
 import AuthContext from './AuthContext';
+import LoaderFullscreen from '../../components/LoaderFullscreen/LoaderFullscreen';
 
 /**
  * Inserts UserContextProvider in the react tree
@@ -26,9 +27,7 @@ const withAuthContextReady = (Component: React.ComponentType<any>): React.FC<any
 
     const {isReady} = useContext(AuthContext);
     return isReady ? <Component {...props} /> :
-        <div style={{height: "100%", minHeight: "95vh", display: "flex", alignItems: "center"}}>
-            cargando
-        </div>
+        < LoaderFullscreen />
 };
 
 export {

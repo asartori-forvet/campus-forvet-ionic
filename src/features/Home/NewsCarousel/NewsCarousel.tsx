@@ -24,7 +24,6 @@ export default function NewsCarousel() {
             })
             const data = await response.json()
             setData(FAKE_NEWS.general[0])
-
          } catch (error) {
             console.log(error)
          } finally { }

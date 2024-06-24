@@ -34,12 +34,34 @@ const CampusRoutes = () => {
          </IonTabBar>
 
          <IonRouterOutlet >
-            <Route path="/dashboard" render={() => <ProtectedRoute component={Home} />} />
-            <Route path="/mis-cursos" render={() => <ProtectedRoute component={OwnCourses} />} />
-            <Route path="/curso/:courseId" render={() => <ProtectedRoute component={CourseDetails} />} />
-            <Route path="/perfil" render={() => <ProtectedRoute component={Profile} />} />
-            <Route path="/clase/:lessonId" render={() => <ProtectedRoute component={LessonDetails} />} />
+            
+            <Route 
+               path="/dashboard" 
+               render={() => <ProtectedRoute component={Home} />} 
+            />
+            
+            <Route 
+               path="/mis-cursos" 
+               render={() => <ProtectedRoute component={OwnCourses} />} 
+            />
+            
+            <Route 
+               path="/curso/:courseId" 
+               render={() => <ProtectedRoute component={CourseDetails} />} 
+            />
+            
+            <Route 
+               path="/perfil" 
+               render={() => <ProtectedRoute component={Profile} />} 
+            />
+            
+            <Route 
+               path="/clase/:lessonId" 
+               render={() => <ProtectedRoute component={LessonDetails} />} 
+            />
+
          </IonRouterOutlet>
+
 
       </IonTabs>
    )

@@ -25,11 +25,11 @@ const withAppContextProvider = (Component: ComponentType<any>) => (props: any): 
 
 const withAppContextReady = (Component: React.ComponentType<any>): React.FC<any> => (props: any) => {
    const { isReady } = useContext(AppContext);
-
+   
    return isReady ? <Component {...props} /> : (
-       <div style={{ height: "100%", minHeight: "95vh", display: "flex", alignItems: "center" }}>
-           Loading...
-       </div>
+      <div style={{ height: "100%", minHeight: "95vh", display: "flex", alignItems: "center" }}>
+         {/* Loading... */}
+      </div>
    );
 };
 

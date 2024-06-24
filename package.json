@@ -4,10 +4,10 @@
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^2.2.0",
-    "@capacitor/android": "^5.6.0",
+    "@capacitor/android": "^5.7.6",
     "@capacitor/app": "^5.0.0",
     "@capacitor/browser": "^5.0.0",
-    "@capacitor/core": "^5.6.0",
+    "@capacitor/core": "^5.7.6",
     "@capacitor/haptics": "^5.0.0",
     "@capacitor/ios": "^5.6.0",
     "@capacitor/keyboard": "^5.0.0",
@@ -72,7 +72,7 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-private-property-in-object": "^7.23.4",
-    "@capacitor/cli": "^5.6.0"
+    "@capacitor/cli": "^5.7.6"
   },
   "description": "An Ionic project"
 }

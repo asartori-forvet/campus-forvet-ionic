@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo, useContext, ReactNode } from "react";
-import AppContext, { UserType } from "./AppContext";
+import AppContext from "./AppContext";
 import AuthContext from "../AuthContext";
-import { Item } from "../../types/types";
+import { Item, UserType } from "../../types/types";
 
 interface AppContextProviderProps {
    children: ReactNode;
@@ -32,6 +32,7 @@ const AppContextProvider: React.FC<AppContextProviderProps> = ({ children }) => 
             setCurrentUser(data.user);
          } catch (err) {
             console.log(err);
+            
          } finally{
             setIsReady(true);
          }
@@ -46,14 +47,14 @@ const AppContextProvider: React.FC<AppContextProviderProps> = ({ children }) => 
          currentUser,
          setCurrentUser,
          courses,
-         setCourses
+         setCourses,
       }),
       [
          isReady,
          currentUser,
          setCurrentUser,
          courses,
-         setCourses
+         setCourses,
       ]
    );
    return (

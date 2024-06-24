@@ -10,7 +10,6 @@ import AppContext from '../../contexts/AppContext'
 
 
 export default function OwnCourses() {
-   // idea obttener los cursos en el context asi se carga una sola vez
    const { courses, setCourses} = useContext(AppContext)
    const { authToken } = useContext(AuthContext)
    const [isLoading, setIsLoading] = useState(false)
@@ -40,12 +39,10 @@ export default function OwnCourses() {
             setIsLoading(false)
          }
       }
-      if(courses?.length === 0){
+      if(courses === null){
          getCourses()
       }
    }, [authToken, courses, setCourses])
-
-
 
    const filterCourses = () => {
       return courses?.filter(course => {
@@ -56,7 +53,6 @@ export default function OwnCourses() {
    };
 
    const filteredCourses = filterCourses();
-
 
    return (
       <IonPage>
@@ -74,7 +70,7 @@ export default function OwnCourses() {
                            clearInput={true}
                            disabled={isLoading}
                            onIonChange={({ target }) => {
-                              const value = target.value?.toString(); // Usa el operador optional chaining '?.' para evitar errores si target.value es null o undefined
+                              const value = target.value?.toString();
                               if (value) {
                                  setFilter(prevState => ({
                                     ...prevState,
@@ -98,7 +94,7 @@ export default function OwnCourses() {
                   </div>
                </div>
 
-               {(isLoading && courses?.length === 0) &&
+               {(isLoading) &&
                   <>
                      < CardSkeleton />
                      < CardSkeleton />

@@ -1,10 +1,11 @@
-import { IonAvatar, IonButton, IonContent, IonInput, IonPage, IonSpinner } from '@ionic/react'
+import { IonAvatar, IonButton, IonContent, IonInput, IonPage } from '@ionic/react'
 import React, { useContext, useEffect, useState } from 'react'
 import './Profile.css'
 import AppContext from '../../contexts/AppContext'
 import AuthContext from '../../contexts/AuthContext'
 import SectionHeader from '../../components/SectionHeader/SectionHeader'
 import LogoutButton from '../../components/LogoutButton'
+import LoaderFullscreen from '../../components/LoaderFullscreen/LoaderFullscreen'
 
 export default function Profile() {
    const { currentUser, setCurrentUser } = useContext(AppContext)
@@ -22,7 +23,9 @@ export default function Profile() {
                   Authorization: `Bearer ${authToken}`
                }
             })
+
             const data = await response.json()
+
             if (data && data.user && setCurrentUser) {
                setCurrentUser(data.user);
             }
@@ -36,13 +39,24 @@ export default function Profile() {
       getUserInfo()
    }, [currentUser, authToken, setCurrentUser])
 
+   // const onSubmit = async (event: Event) => {
+   //    event.preventDefault()
+   //    const name = event?.target?.name.value
+   //    const email = event?.target?.email.value
+   //    const phone = event?.target?.phone.value
+   //    const nationality = event?.target?.nationality.value
+
+   //    if (!name || !email || !phone || !nationality) {
+   //       return console.log('return')
+   //    }
+   // }
 
    return (
       <IonPage>
          < SectionHeader title='Mi perfil' />
          <IonContent fullscreen>
             {isLoading || !currentUser
-               ? < IonSpinner />
+               ? < LoaderFullscreen />
                : <div className='Profile-main-container'>
                   <div className='Profile-avatar-container'>
                      <IonAvatar className='Profile--avatar' >
@@ -53,36 +67,36 @@ export default function Profile() {
 
                   </div>
 
-
-
                   <form className='Profile-form-container'>
 
                      <div className='Profile-form-input-container'>
                         <h5 className='Profile-form-input--label'>Nombre</h5>
                         <IonInput
                            className='Profile-form--input'
-                           disabled value={`${currentUser?.name} ${currentUser?.lastname}`}></IonInput>
+                           name='name' disabled={isLoading} 
+                           value={`${currentUser?.name} ${currentUser?.lastname}`}></IonInput>
                      </div>
 
                      <div className='Profile-form-input-container'>
                         <h5 className='Profile-form-input--label'>Email</h5>
                         <IonInput
                            className='Profile-form--input'
-                           disabled type='email' value={currentUser.email}></IonInput>
+                           name='email' disabled type='email' value={currentUser.email}></IonInput>
                      </div>
 
                      <div className='Profile-form-input-container'>
                         <h5 className='Profile-form-input--label'>Teléfono</h5>
                         <IonInput
+
                            className='Profile-form--input'
-                           disabled value={currentUser.phone}></IonInput>
+                           name='phone' disabled={isLoading} value={currentUser.phone}></IonInput>
                      </div>
 
                      <div className='Profile-form-input-container'>
                         <h5 className='Profile-form-input--label'>Nacionalidad</h5>
                         <IonInput
                            className='Profile-form--input'
-                           disabled value={currentUser.nationality}></IonInput>
+                           name='nationality' disabled={isLoading} value={currentUser.nationality}></IonInput>
                      </div>
 
                      <div className='Profile-form-button-container'>
@@ -92,6 +106,7 @@ export default function Profile() {
 
                </div>
             }
+
          </IonContent>
       </IonPage>
    )

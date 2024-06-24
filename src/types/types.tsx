@@ -1,4 +1,45 @@
 /* CARD COURSE */
+
+
+export interface UserType {
+   _id: string;
+   about: {
+      description: string;
+      personalItems: string[];
+   };
+   academicUnits: string[];
+   academicUnitsData: {
+      certificates: string[];
+   };
+   animalType: string;
+   birthDate: string;
+   city: string;
+   codirection: string[];
+   coordinator: string[];
+   direction: string[];
+   disabled: boolean;
+   discussions: {
+      allowed: boolean;
+      interest: string[];
+   };
+   email: string;
+   env: string;
+   exams: string[];
+   forVetRole: string[];
+   gender: string;
+   lastname: string;
+   name: string;
+   nationality: string;
+   notes: any[];
+   phone: string;
+   profilePicture: string;
+   specialties: string[];
+   testimonies: string[];
+   type: string;
+   user_id_campus: string;
+   __v: number;
+}
+
 interface Price {
    usd: number;
    ars: number;
@@ -95,14 +136,14 @@ export interface LessonItem {
    state: State;
    teachers: Teacher[];
    userHasRated: boolean;
-   
+
    __v: number;
    _id: string;
 }
 
 export interface LessonData {
    data: {
-      initDate: string; 
+      initDate: string;
       materials: any[];
       name: string;
       roomUrl: string;

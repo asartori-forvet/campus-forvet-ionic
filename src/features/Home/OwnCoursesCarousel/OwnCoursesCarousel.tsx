@@ -1,4 +1,4 @@
-import { IonButton, IonItem, IonLabel, IonList, IonListHeader, IonSkeletonText, IonThumbnail } from "@ionic/react";
+import { IonButton, IonItem } from "@ionic/react";
 import { useContext, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import AuthContext from "../../../contexts/AuthContext";
