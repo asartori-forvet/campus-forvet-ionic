@@ -1,0 +1,57 @@
+.OwnCoruses-wrapper-container{
+   width: 100%;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+}
+
+.OwnCourses-input-container{
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   padding: 20px 10px;
+}
+
+.OwnCourses-input-wrapper{
+   width: 100%;
+   height: 100%;
+   display: flex;
+   padding: 8px 12px;
+   align-items: center;
+   justify-content: center;
+   background-color: var(--ion-color-primary);
+   border-radius: var(--border-radius-sm);
+}
+
+.OwnCourses-select-container{
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   padding: 10px;
+}
+
+.OwnCourses-select-wrapper{
+   width: 100%;
+   height: 100%;
+   display: flex;
+   padding: 8px 12px;
+   background-color: var(--ion-color-primary);
+   border-radius: var(--border-radius-sm);
+}
+
+ .OwnCourses-select-container .select-custom {
+   --color: var(--ion-color-primary-contrast);
+ }
+ 
+ .OwnCourses-select-container .select-custom .select-icon {
+   color: var(--ion-color-primary-contrast);
+ }
+ 
+ .OwnCourses-select-container .select-custom .select-text {
+   color: var(--ion-color-primary-contrast);
+ }

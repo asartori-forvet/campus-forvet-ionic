@@ -1,0 +1,30 @@
+.LoginPage-wrapper-container {
+   width: 100%;
+   height: 100%;
+   flex-grow: 1;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-around;
+   background-color: var(--ion-color-primary);
+}
+
+.LoginPage-content-container {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+   overflow-x: hidden;
+}
+
+.LoginPage-logo-image{
+   width: 350px;
+   height: auto;
+   object-fit: cover;
+}
+
+.LoginPage-button-container {
+   width: 100%;
+   align-items: center;
+   justify-content: center;
+   display: flex;
+}

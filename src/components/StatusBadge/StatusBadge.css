@@ -1,0 +1,12 @@
+
+.StatusBadge--status-badge{
+   font-size: var(--fs-small);
+}
+
+.StatusBadge--open {
+   background-color: var(--ion-color-success);
+}
+
+.StatusBadge--closed {
+   background-color: var(--ion-color-danger);
+}
