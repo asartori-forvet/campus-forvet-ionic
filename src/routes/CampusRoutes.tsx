@@ -7,13 +7,12 @@ import OwnCourses from '../pages/OwnCourses/OwnCourses';
 import CourseDetails from '../pages/CourseDetails/CourseDetails';
 import Profile from '../pages/Profile/Profile';
 import LessonDetails from '../pages/LessonDetails/LessonDetails';
-import { IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, useIonRouter } from '@ionic/react';
+import { IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } from '@ionic/react';
 import { home, person, school } from 'ionicons/icons';
 
-const CampusRoutes = () => {
-   const {canGoBack} = useIonRouter()
-
-   const canBack = canGoBack()
+const CampusRoutes: React.FC = () => {
+   // const {canGoBack} = useIonRouter()
+   // const canBack = canGoBack()
 
    return (
       <IonTabs >
@@ -68,4 +67,5 @@ const CampusRoutes = () => {
 }
 
 export default withAppContextProvider(withAppContextReady(CampusRoutes));
+
 
