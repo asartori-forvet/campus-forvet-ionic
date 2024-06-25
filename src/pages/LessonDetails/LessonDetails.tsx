@@ -96,7 +96,7 @@ export default function LessonDetails() {
                      </div>
 
                      <div>
-                        <Title style={{ fontSize: '22px', marginBottom: 'var(--padding-app)', textAlign: 'center' }}>Profesores</Title>
+                        <Title style={{ fontSize: '22px', marginBottom: 'var(--gap-sm)', textAlign: 'center' }}>Profesores</Title>
                         <Swiper
                            slidesPerView={2}
                            spaceBetween={0}
@@ -120,7 +120,7 @@ export default function LessonDetails() {
                      </div>
 
                      {lesson?.moderator && <div>
-                        <Title style={{ fontSize: '22px', marginBottom: 'var(--padding-app)', textAlign: 'center' }}>Moderador</Title>
+                        <Title style={{ fontSize: '22px', marginBottom: 'var(--gap-sm)', textAlign: 'center' }}>Moderador</Title>
                         <div>
                            <div className='LessonDetails-teacher-carousel-item'>
                               {lesson?.moderator.profilePicture &&
