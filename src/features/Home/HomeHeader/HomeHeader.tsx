@@ -13,7 +13,7 @@ export default function HomeHeader() {
             ? < SectionHeader
                withBackArrow={false}
                styles={{
-                  toolbar: { paddingLeft: '20px' }
+                  toolbar: { paddingLeft: 'var(--padding-app)' }
                }}
                title='Forvet Campus'
             />

@@ -41,6 +41,7 @@ export default function SectionHeader({
    children,
    styles,
 }: SectionHeaderProps) {
+
    const { notifications: NOTIFICATIONS, setNotifications } = useContext(AppContext)
    const { authToken } = useContext(AuthContext)
    const { canGoBack } = useIonRouter();
@@ -48,6 +49,7 @@ export default function SectionHeader({
 
    const [isOpen, setIsOpen] = useState(false);
    const [isLoading, setIsLoading] = useState(false);
+   const [error, setError] = useState(false);
 
    useEffect(() => {
       const getNotifications = async () => {
@@ -68,14 +70,15 @@ export default function SectionHeader({
 
          } catch (error) {
             console.log(error)
+            setError(true)
          } finally {
             setIsLoading(false)
          }
       }
-      if (NOTIFICATIONS === null) {
+      if (NOTIFICATIONS === null && !error) {
          getNotifications()
       }
-   }, [authToken, NOTIFICATIONS, setNotifications])
+   }, [authToken, NOTIFICATIONS, setNotifications, error])
 
    const allNotifications = [
       ...(NOTIFICATIONS?.nationality[0] ?? []),
@@ -93,7 +96,7 @@ export default function SectionHeader({
          display: 'grid',
          placeItems: 'center',
          position: 'absolute',
-         right: '10px',
+         right: 'var(--padding-app)',
          top: '30px',
       },
       badge: {

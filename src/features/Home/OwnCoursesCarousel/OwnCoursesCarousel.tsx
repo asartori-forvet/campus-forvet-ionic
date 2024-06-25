@@ -6,14 +6,20 @@ import './OwnCoursesCarousel.css'
 import Title from "../../../components/Title/Title";
 import CardSkeleton from "../../../components/CardSkeleton/CardSkeleton";
 import AppContext from "../../../contexts/AppContext";
+import { useHistory } from "react-router";
+import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
 
 export default function OwnCoursesCarousel() {
    const { courses, setCourses } = useContext(AppContext)
    const { authToken } = useContext(AuthContext)
    const [isLoading, setIsLoading] = useState(false)
-   
+   const [error, setError] = useState(false)
+   const history = useHistory()
+
    useEffect(() => {
       const getCourses = async () => {
+         console.log('OWNCOURSES CAROUSEL')
+
          setIsLoading(true)
          try {
             const response = await fetch('http://localhost:8000/campus/users/courses', {
@@ -25,18 +31,20 @@ export default function OwnCoursesCarousel() {
             const data = await response.json()
             if (data && setCourses) {
                setCourses(data)
+               setError(false)
             }
 
          } catch (error) {
             console.log(error)
+            setError(true)
          } finally {
             setIsLoading(false)
          }
       }
-      if (courses === null) {
+      if (courses === null && !error) {
          getCourses()
       }
-   }, [authToken, courses, setCourses])
+   }, [authToken, courses, setCourses, error])
 
    return (
       <div className="OwnCoursesCarousel-main-container">
@@ -44,7 +52,7 @@ export default function OwnCoursesCarousel() {
          {(isLoading) &&
             < CardSkeleton />
          }
-
+         {error && < ErrorMessage text='Ha ocurrido un error al cargar los cursos' />}
          {courses && courses?.length > 0 &&
             <div>
                <Swiper
@@ -65,7 +73,10 @@ export default function OwnCoursesCarousel() {
                   ))}
                </Swiper>
             </div>}
-         <IonButton color='secondary' routerLink="/mis-cursos">ver todos los cursos</IonButton>
+         <IonButton
+            disabled={isLoading}
+            color='secondary'
+            onClick={() => !error ? history.push('/mis-cursos') : setError(false)}>{!error ? 'ver todos los cursos' : 'Cargar nuevamente'}</IonButton>
 
       </div>
    )

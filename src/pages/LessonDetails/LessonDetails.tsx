@@ -81,14 +81,14 @@ export default function LessonDetails() {
                            color='primary'
                            onClick={() => openUrl(`${lesson.roomUrl}`)}
                         >
-                           <IonIcon style={{ marginRight: '10px' }} slot="icon-only" icon={videocam}></IonIcon>
+                           <IonIcon style={{ marginRight: 'var(--gap-xsm)' }} slot="icon-only" icon={videocam}></IonIcon>
                            Link de Zoom
                         </IonButton>
                      }
 
                      <div>
                         <Title style={{ fontSize: '22px', textAlign: 'center' }}>
-                           <IonIcon style={{ marginRight: '10px' }} color='primary' icon={calendar}>
+                           <IonIcon style={{ marginRight: 'var(--gap-xsm)' }} color='primary' icon={calendar}>
                            </IonIcon>
                            Fecha de inicio
                         </Title>
@@ -96,7 +96,7 @@ export default function LessonDetails() {
                      </div>
 
                      <div>
-                        <Title style={{ fontSize: '22px', marginBottom: '20px', textAlign: 'center' }}>Profesores</Title>
+                        <Title style={{ fontSize: '22px', marginBottom: 'var(--padding-app)', textAlign: 'center' }}>Profesores</Title>
                         <Swiper
                            slidesPerView={2}
                            spaceBetween={0}
@@ -120,7 +120,7 @@ export default function LessonDetails() {
                      </div>
 
                      {lesson?.moderator && <div>
-                        <Title style={{ fontSize: '22px', marginBottom: '20px', textAlign: 'center' }}>Moderador</Title>
+                        <Title style={{ fontSize: '22px', marginBottom: 'var(--padding-app)', textAlign: 'center' }}>Moderador</Title>
                         <div>
                            <div className='LessonDetails-teacher-carousel-item'>
                               {lesson?.moderator.profilePicture &&

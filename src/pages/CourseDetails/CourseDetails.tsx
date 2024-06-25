@@ -48,7 +48,7 @@ export default function CourseDetails() {
 
          < SectionHeader title={'Curso'} />
 
-         <IonContent style={{ padding: '20px' }} fullscreen>
+         <IonContent style={{ padding: 'var(--padding-app)' }} fullscreen>
             {isLoading
                ? < CardSkeleton />
                : <>

@@ -2,7 +2,7 @@
    display: flex;
    flex-direction: column;
    width: 100%;
-   gap: 30px;
+   gap: var(--gap-md);
 }
 
 .OwnCoursesCarousel-article{
@@ -10,8 +10,7 @@
    display: flex;
    flex-direction: column;
    align-items: center;
-   gap: 10px;
-
+   gap: var(--gap-xsm);
 }
 
 .OwnCoursesCarousel-article--image{

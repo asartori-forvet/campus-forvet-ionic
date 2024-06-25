@@ -31,7 +31,7 @@ const LessonCard: React.FC<LessonCardProps> = ({ lesson }) => {
                   color='secondary'
                   onClick={() => openUrl(`${lesson.data.roomUrl}`)}
                >
-                  <IonIcon style={{ marginRight: '10px' }} slot="icon-only" icon={videocam}></IonIcon>
+                  <IonIcon style={{ marginRight: 'var(--gap-xsm)' }} slot="icon-only" icon={videocam}></IonIcon>
                   Ver Clase
                </IonButton>
                <IonButton

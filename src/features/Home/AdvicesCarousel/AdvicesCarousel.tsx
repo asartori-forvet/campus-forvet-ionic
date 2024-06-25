@@ -28,9 +28,7 @@ export default function AdvicesCarousel() {
 
             const data = await response.json()
             setAdvices(data)
-            console.log({ data })
-
-
+            setError(false)
          } catch (error) {
             console.log(error)
             setError(true)

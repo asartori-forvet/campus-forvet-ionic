@@ -1,0 +1,19 @@
+.ErrorMessage-main-container {
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 4px var(--gap-xsm);
+   background-color: var(--ion-color-danger-tint);
+   border-radius: var(--border-radius-sm);
+}
+
+
+.ErrorMessage-main-container {
+   width: 100%;
+   text-wrap: pretty;
+   color: #fff;
+   text-align: center;
+   font-weight: 700;
+   font-size: var(--fs-body);
+}

@@ -23,6 +23,14 @@ http://ionicframework.com/docs/theming/ */
    --fs-small: 14px;
    --fs-tiny: 12px;
 
+   /* COMPONENTS  */
+   --padding-app: 16px;
+   --gap-xsm: 8px;
+   --gap-sm: 16px;
+   --gap-md: 24px;
+   --gap-lg: 32px;
+
+
    /*BORDER RADIUS*/
    --border-radius-lg: 1.5rem;
    --border-radius-md: 1rem;

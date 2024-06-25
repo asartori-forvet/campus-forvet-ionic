@@ -3,7 +3,7 @@
    height: 100%;
    display: flex;
    flex-direction: column;
-   gap: 20px;
+   gap: var(--padding-app);
 }
 
 .OwnCourses-input-container{
@@ -12,14 +12,14 @@
    flex-direction: column;
    align-items: center;
    justify-content: center;
-   padding: 20px 10px;
+   padding: var(--gap-sm) var(--gap-xsm);
 }
 
 .OwnCourses-input-wrapper{
    width: 100%;
    height: 100%;
    display: flex;
-   padding: 8px 12px;
+   padding: var(--gap-xsm) var(--gap-sm);
    align-items: center;
    justify-content: center;
    background-color: var(--ion-color-primary);
@@ -32,14 +32,14 @@
    flex-direction: column;
    align-items: center;
    justify-content: center;
-   padding: 10px;
+   padding: var(--gap-xsm);
 }
 
 .OwnCourses-select-wrapper{
    width: 100%;
    height: 100%;
    display: flex;
-   padding: 8px 12px;
+   padding: var(--gap-xsm) var(--gap-sm);
    background-color: var(--ion-color-primary);
    border-radius: var(--border-radius-sm);
 }

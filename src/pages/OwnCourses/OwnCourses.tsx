@@ -7,12 +7,15 @@ import Title from '../../components/Title/Title'
 import CardSkeleton from '../../components/CardSkeleton/CardSkeleton'
 import CardCourse from '../../components/CardCourse/CardCourse'
 import AppContext from '../../contexts/AppContext'
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 
 
 export default function OwnCourses() {
    const { courses, setCourses} = useContext(AppContext)
    const { authToken } = useContext(AuthContext)
    const [isLoading, setIsLoading] = useState(false)
+   const [error, setError] = useState(false)
+
    const [filter, setFilter] = useState<{ name: string; state: string }>({
       name: '',
       state: 'all',
@@ -32,17 +35,18 @@ export default function OwnCourses() {
             if(data && setCourses){
                setCourses(data)
             }
-
+            setError(false)
          } catch (error) {
             console.log(error)
+            setError(true)
          } finally {
             setIsLoading(false)
          }
       }
-      if(courses === null){
+      if(courses === null && !error){
          getCourses()
       }
-   }, [authToken, courses, setCourses])
+   }, [authToken, courses, setCourses, error])
 
    const filterCourses = () => {
       return courses?.filter(course => {
@@ -65,10 +69,10 @@ export default function OwnCourses() {
                   <div className='OwnCourses-input-container'>
                      <div className='OwnCourses-input-wrapper'>
                         <IonInput
-                           style={{ paddingLeft: '10px' }}
+                           style={{ paddingLeft: 'var(--gap-xsm)' }}
                            color='light'
                            clearInput={true}
-                           disabled={isLoading}
+                           disabled={isLoading || error}
                            onIonChange={({ target }) => {
                               const value = target.value?.toString();
                               if (value) {
@@ -85,7 +89,7 @@ export default function OwnCourses() {
 
                   <div className='OwnCourses-select-container'>
                      <div className='OwnCourses-select-wrapper'>
-                        <IonSelect color='light' disabled={isLoading} placeholder="Buscar por estado" onIonChange={(e) => setFilter(prevState => ({ ...prevState, state: e.target.value }))}>
+                        <IonSelect color='light' disabled={isLoading || error} placeholder="Buscar por estado" onIonChange={(e) => setFilter(prevState => ({ ...prevState, state: e.target.value }))}>
                            <IonSelectOption color='light' value="all">Todas</IonSelectOption>
                            <IonSelectOption color='light' value="Open">Abiertas</IonSelectOption>
                            <IonSelectOption color='light' value="Closed">Cerradas</IonSelectOption>
@@ -101,6 +105,8 @@ export default function OwnCourses() {
                      < CardSkeleton />
                   </>
                }
+
+               {error && < ErrorMessage text='Error al cargar la lista de cursos' />}
 
                <IonList className='OwnCourses-cards-container'>
                   {(!isLoading && filteredCourses && filteredCourses?.length > 0) &&

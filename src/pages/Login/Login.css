@@ -12,7 +12,7 @@
 .LoginPage-content-container {
    display: flex;
    flex-direction: column;
-   gap: 20px;
+   gap: var(--gap-md);
    overflow-x: hidden;
 }
 

@@ -1,3 +1,10 @@
+.NewsCarousel-main-container{
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   gap: var(--gap-md);
+}
+
 .NewsCarousel-article {
    position: relative;
    width: 100%;
@@ -16,7 +23,7 @@
    margin: 0;
    left: 0;
    background-color: #000000a8;
-   padding: 5px;
+   padding: var(--gap-xsm);
    font-size: var(--fs-small);
    width: 100%;
    color: #fff;

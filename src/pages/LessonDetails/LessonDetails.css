@@ -1,8 +1,8 @@
 .LessonDetails-wrapper-container {
-   padding: 20px;
+   padding: var(--padding-app);
    display: flex;
    flex-direction: column;
-   gap: 30px;
+   gap: var(--gap-md);
 }
 
 .LessonDetails-header-container {
@@ -21,7 +21,7 @@
 .LessonDetails-valoration-container{
    display: flex;
    align-items: center;
-   gap: 10px;
+   gap: var(--gap-xsm);
 }
 
 

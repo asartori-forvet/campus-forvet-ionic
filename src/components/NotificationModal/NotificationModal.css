@@ -9,13 +9,13 @@
    display: flex;
    align-items: flex-start;
    justify-content: flex-start;
-   gap: 5px;
-   padding: 20px 0;
+   gap: var(--gap-xsm);
+   padding: var(--padding-app) 0;
    border-bottom: 1px solid var(--color-text-secondary);
 }
 
 .NotificationModal-notification-item-container:first-child{
-   padding: 0 0 20px 0;
+   padding: 0 0 var(--padding-app) 0;
 }
 
 .NotificationModal-notification-item-container:last-child{
