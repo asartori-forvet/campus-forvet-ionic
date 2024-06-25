@@ -7,6 +7,7 @@ import "./Home.css";
 import OwnCoursesCarousel from "../../features/Home/OwnCoursesCarousel/OwnCoursesCarousel";
 import NewsCarousel from "../../features/Home/NewsCarousel/NewsCarousel";
 import HomeHeader from "../../features/Home/HomeHeader/HomeHeader";
+import AdvicesCarousel from "../../features/Home/AdvicesCarousel/AdvicesCarousel";
 
 const Home: React.FC = () => {
 
@@ -18,6 +19,7 @@ const Home: React.FC = () => {
             <div className="HomePage-wrapper-container">
                < OwnCoursesCarousel />
                < NewsCarousel />
+               < AdvicesCarousel />
             </div>
 
          </IonContent>

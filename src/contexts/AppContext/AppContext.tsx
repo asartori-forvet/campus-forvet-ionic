@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { Item, UserType } from '../../types/types';
+import { Item, Notifications, UserType } from '../../types/types';
 
 interface AppContextProps {
    isReady: boolean;
@@ -7,6 +7,8 @@ interface AppContextProps {
    setCurrentUser: Dispatch<SetStateAction<UserType | null>> | null;
    courses: Item[] | null;
    setCourses: Dispatch<SetStateAction<Item[] | null>> | null; 
+   notifications: Notifications | null;
+   setNotifications: Dispatch<SetStateAction<Notifications | null>> | null;
 }
 
 const defaultValue: AppContextProps = {
@@ -15,6 +17,8 @@ const defaultValue: AppContextProps = {
    setCurrentUser: null,
    setCourses: null,
    courses: null,
+   notifications: null,
+   setNotifications: null,
 };
 
 const AppContext = React.createContext<AppContextProps>(defaultValue);

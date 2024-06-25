@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo, useContext, ReactNode } from "react";
 import AppContext from "./AppContext";
 import AuthContext from "../AuthContext";
-import { Item, UserType } from "../../types/types";
+import { Item, Notifications, UserType } from "../../types/types";
 
 interface AppContextProviderProps {
    children: ReactNode;
@@ -12,6 +12,7 @@ const AppContextProvider: React.FC<AppContextProviderProps> = ({ children }) => 
    const [isReady, setIsReady] = useState<boolean>(false);
    const [currentUser, setCurrentUser] = useState<UserType | null>(null);
    const [courses, setCourses] = useState<Item[] | null>(null);
+   const [notifications, setNotifications] = useState<Notifications | null>(null);
 
    useEffect(() => {
       
@@ -48,6 +49,8 @@ const AppContextProvider: React.FC<AppContextProviderProps> = ({ children }) => 
          setCurrentUser,
          courses,
          setCourses,
+         notifications, 
+         setNotifications
       }),
       [
          isReady,
@@ -55,6 +58,8 @@ const AppContextProvider: React.FC<AppContextProviderProps> = ({ children }) => 
          setCurrentUser,
          courses,
          setCourses,
+         notifications, 
+         setNotifications
       ]
    );
    return (

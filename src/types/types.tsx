@@ -152,3 +152,36 @@ export interface LessonData {
    }
    type: 'lessons'; // O cualquier otra cadena que uses para identificar el tipo de lección
 }
+
+/* NEWS / Notificaciones */
+export interface Notification {
+   _id: string;
+   place: string;
+   img?: string;
+   title: string;
+   notification: string;
+   expireAt: string;
+   __v: number;
+   link?: string;
+   type?: string;
+   newDate?: string;
+}
+
+export interface Notifications {
+   nationality: Notification[][];
+   general: Notification[][];
+   acaUnits: Notification[][];
+}
+
+export interface Advice {
+   _id: string;
+   advice: string;
+   user: {
+      _id: string;
+      type: string;
+      name: string;
+      lastname: string;
+      profilePicture?: string;
+   };
+   __v: number;
+}
