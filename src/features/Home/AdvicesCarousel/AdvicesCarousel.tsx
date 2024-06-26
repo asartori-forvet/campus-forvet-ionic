@@ -1,45 +1,13 @@
-import { useContext, useEffect, useState } from "react";
 import CardSkeleton from "../../../components/CardSkeleton/CardSkeleton";
-import AuthContext from "../../../contexts/AuthContext";
 import Title from "../../../components/Title/Title";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { IonAvatar, IonBadge, IonItem } from "@ionic/react";
-import { Advice } from "../../../types/types";
 import './AdvicesCarousel.css'
+import useAdvices from "../../../hooks/Home/useAdvices";
 
 
 export default function AdvicesCarousel() {
-   const { authToken } = useContext(AuthContext)
-   const [isLoading, setIsLoading] = useState(false)
-   const [advices, setAdvices] = useState<Advice[] | null>(null);
-   const [error, setError] = useState(false)
-
-   useEffect(() => {
-      const getAdvices = async () => {
-         try {
-            setIsLoading(true)
-
-            const response = await fetch('http://localhost:8000/campus/advices', {
-               headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${authToken}`
-               }
-            })
-
-            const data = await response.json()
-            setAdvices(data)
-            setError(false)
-         } catch (error) {
-            console.log(error)
-            setError(true)
-         } finally {
-            setIsLoading(false)
-         }
-      }
-      if (advices === null && !error) {
-         getAdvices()
-      }
-   }, [authToken, advices, error])
+   const { advices, isLoading } = useAdvices();
 
    return (
       <div className="AdvicesCarousel-main-container">
@@ -56,7 +24,7 @@ export default function AdvicesCarousel() {
                         <SwiperSlide
                            key={item._id}
                         >
-                           <IonItem color='primary-light'  className="AdvicesCarousel-article-main-container" >
+                           <IonItem color='primary-light' className="AdvicesCarousel-article-main-container" >
                               <div color="primary.1" className="AdvicesCarousel-article-wrapper">
                                  <div className="AdvicesCarousel-article--header">
                                     {item.user.profilePicture &&

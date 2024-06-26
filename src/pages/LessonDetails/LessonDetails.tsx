@@ -1,16 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
 import './LessonDetails.css'
-import { IonAvatar, IonBadge, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonModal, IonPage, IonSpinner, IonTitle, IonToolbar } from '@ionic/react'
+import { IonContent, IonIcon, IonPage } from '@ionic/react'
 import SectionHeader from '../../components/SectionHeader/SectionHeader'
-import AuthContext from '../../contexts/AuthContext'
-import { useParams } from 'react-router'
 import Title from '../../components/Title/Title'
-import { calendar, videocam, starOutline, download, fileTray } from 'ionicons/icons'
-import { Swiper, SwiperSlide } from 'swiper/react'
 import moment from 'moment'
-import StatusBadge from '../../components/StatusBadge/StatusBadge'
-import { openUrl } from '../../utils/openUrl'
-import { LessonItem } from '../../types/types'
 import MaterialModal from '../../features/LessonDetails/MaterialModal/MaterialModal'
 import LoaderFullscreen from '../../components/LoaderFullscreen/LoaderFullscreen'
 import useLessonDetails from '../../hooks/LessonDetails/useLessonDetails'
@@ -18,6 +10,7 @@ import LessonHeader from '../../features/LessonDetails/LessonHeader/LessonHeader
 import LessonLinks from '../../features/LessonDetails/LessonLinks/LessonLinks'
 import TeacherCarousel from '../../features/LessonDetails/TeacherCarousel/TeacherCarousel'
 import ModeratorInfo from '../../features/LessonDetails/ModeratorInfo/ModeratorInfo'
+import { calendar } from 'ionicons/icons'
 
 const fakeMaterials = [
    {
@@ -27,7 +20,6 @@ const fakeMaterials = [
       type: 'pdf'
    }
 ]
-
 
 export default function LessonDetails() {
    const { 

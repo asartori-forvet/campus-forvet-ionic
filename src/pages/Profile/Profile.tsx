@@ -9,6 +9,7 @@ import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import { COUNTRIES_LIST } from '../../utils/country-list'
 import { capitalize } from '../../utils/capitalize'
 import useProfile from '../../hooks/Profile/useProfile'
+import Input from '../../components/Input/Input'
 
 export default function Profile() {
    const { currentUser } = useContext(AppContext)
@@ -44,35 +45,33 @@ export default function Profile() {
 
                   <form className='Profile-form-container' onSubmit={onSubmit}>
 
-                     <div className='Profile-form-input-container'>
-                        <h5 className='Profile-form-input--label'>Nombre</h5>
-                        <IonInput
-                           className='Profile-form--input'
-                           name='name' disabled={isLoading}
-                           value={currentUser?.name}></IonInput>
-                     </div>
+                     < Input 
+                        name='name'
+                        disabled={isLoading}
+                        value={currentUser?.name}
+                        label='Nombre'
+                     />
 
-                     <div className='Profile-form-input-container'>
-                        <h5 className='Profile-form-input--label'>Apellido</h5>
-                        <IonInput
-                           className='Profile-form--input'
-                           name='lastname' disabled={isLoading}
-                           value={currentUser?.lastname}></IonInput>
-                     </div>
+                     < Input 
+                        name='lastname'
+                        disabled={isLoading}
+                        value={currentUser?.lastname}
+                        label='Apellido'
+                     />
 
-                     <div className='Profile-form-input-container'>
-                        <h5 className='Profile-form-input--label'>Email</h5>
-                        <IonInput
-                           className='Profile-form--input'
-                           name='email' disabled type='email' value={currentUser.email}></IonInput>
-                     </div>
+                     < Input 
+                        name='email'
+                        disabled
+                        value={currentUser?.email}
+                        label='Email'
+                     />
 
-                     <div className='Profile-form-input-container'>
-                        <h5 className='Profile-form-input--label'>Teléfono</h5>
-                        <IonInput
-                           className='Profile-form--input'
-                           name='phone' disabled={isLoading} value={currentUser.phone}></IonInput>
-                     </div>
+                     < Input 
+                        name='phone'
+                        disabled={isLoading}
+                        value={currentUser?.phone}
+                        label='Teléfono'
+                     />
 
                      <div className='Profile-form-input-container'>
                         <h5 className='Profile-form-input--label'>Nacionalidad</h5>
