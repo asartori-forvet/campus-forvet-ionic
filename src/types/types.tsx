@@ -185,3 +185,14 @@ export interface Advice {
    };
    __v: number;
 }
+
+
+/* notifiaciones */
+
+type AlertStatus = '' | 'success' | 'warning' | 'error';
+
+export interface AlertState {
+   isOpen: boolean;
+   message: string;
+   status: AlertStatus;
+}

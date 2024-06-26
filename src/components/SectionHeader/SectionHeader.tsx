@@ -62,7 +62,6 @@ export default function SectionHeader({
                }
             })
             const data = await response.json()
-            console.log({ data, isRender: 'se hizo de nuevo el campusNews' })
             if (setNotifications) {
                // setNotifications(data)
                setNotifications(FAKE_NEWS)

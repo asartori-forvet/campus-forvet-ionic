@@ -18,7 +18,6 @@ export default function OwnCoursesCarousel() {
 
    useEffect(() => {
       const getCourses = async () => {
-         console.log('OWNCOURSES CAROUSEL')
 
          setIsLoading(true)
          try {

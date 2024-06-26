@@ -22,6 +22,7 @@ export default function AppRoutes() {
          < Route exact={true} path="/callback" render={() => <Callback />} />
 
          < CampusRoutes />
+         
       </IonRouterOutlet>
    )
 

@@ -17,4 +17,5 @@
    color: var(--color-text-secondary);
    font-size: var(--fs-small);
    text-transform: uppercase;
+   font-weight: 700;
 }

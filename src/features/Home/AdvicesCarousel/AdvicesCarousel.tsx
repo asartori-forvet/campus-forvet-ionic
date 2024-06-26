@@ -3,7 +3,7 @@ import CardSkeleton from "../../../components/CardSkeleton/CardSkeleton";
 import AuthContext from "../../../contexts/AuthContext";
 import Title from "../../../components/Title/Title";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { IonAvatar, IonItem } from "@ionic/react";
+import { IonAvatar, IonBadge, IonItem } from "@ionic/react";
 import { Advice } from "../../../types/types";
 import './AdvicesCarousel.css'
 
@@ -50,14 +50,14 @@ export default function AdvicesCarousel() {
                <div>
                   <Swiper
                      slidesPerView={1}
-                     spaceBetween={0}
+                     spaceBetween={16}
                   >
                      {advices?.map(item => (
                         <SwiperSlide
                            key={item._id}
                         >
-                           <IonItem style={{ position: 'relative' }} >
-                              <div className="AdvicesCarousel-article">
+                           <IonItem color='primary' className="AdvicesCarousel-article-main-container" >
+                              <div className="AdvicesCarousel-article-wrapper">
                                  <div className="AdvicesCarousel-article--header">
                                     {item.user.profilePicture &&
                                        <IonAvatar className="AdvicesCarousel-article--avatar">
@@ -66,7 +66,8 @@ export default function AdvicesCarousel() {
                                     }
                                     <div className="AdvicesCarousel-article--header-user-description">
                                        <h3 className="AdvicesCarousel-article--username">{item.user.name} {item.user.lastname}</h3>
-                                       {item.user.type && <h4 className="AdvicesCarousel-article--type">{item.user.type}</h4>}
+                                       {/* {item.user.type && <h4 className="AdvicesCarousel-article--type">{item.user.type}</h4>} */}
+                                       {item.user.type && <IonBadge color='light' className="AdvicesCarousel-article--type">{item.user.type}</IonBadge>}
                                     </div>
                                  </div>
                                  <p className="AdvicesCarousel-article--text">{item.advice}</p>

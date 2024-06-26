@@ -1,14 +1,16 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { Item, Notifications, UserType } from '../../types/types';
+import { AlertState, Item, Notifications, UserType } from '../../types/types';
 
 interface AppContextProps {
    isReady: boolean;
    currentUser: UserType | null;
    setCurrentUser: Dispatch<SetStateAction<UserType | null>> | null;
    courses: Item[] | null;
-   setCourses: Dispatch<SetStateAction<Item[] | null>> | null; 
+   setCourses: Dispatch<SetStateAction<Item[] | null>> | null;
    notifications: Notifications | null;
    setNotifications: Dispatch<SetStateAction<Notifications | null>> | null;
+   alert: AlertState;
+   setAlert: Dispatch<SetStateAction<AlertState>>;
 }
 
 const defaultValue: AppContextProps = {
@@ -19,6 +21,12 @@ const defaultValue: AppContextProps = {
    courses: null,
    notifications: null,
    setNotifications: null,
+   alert: {
+      isOpen: false,
+      message: '',
+      status: '',
+   },
+   setAlert: () => {},
 };
 
 const AppContext = React.createContext<AppContextProps>(defaultValue);
