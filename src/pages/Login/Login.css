@@ -7,6 +7,7 @@
    align-items: center;
    justify-content: space-around;
    background-color: var(--ion-color-primary);
+   padding: var(--padding-app);
 }
 
 .LoginPage-content-container {
@@ -16,8 +17,41 @@
    overflow-x: hidden;
 }
 
-.LoginPage-logo-image{
+.LoginPage-logo-image {
    width: 350px;
+   height: auto;
+   object-fit: cover;
+}
+
+.LoginPage-carousel-main-container{
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+}
+
+
+
+.LoginPage-animal-item-container{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+
+.LoginPage-animal-item--text{
+
+   color: #fff;
+   text-align: center;
+   text-wrap: pretty;
+   max-width: 100%;
+   font-size: var(--fs-small);
+}
+
+.LoginPage-animal--image {
+   width: 100%;
+   max-width: 150px;
    height: auto;
    object-fit: cover;
 }

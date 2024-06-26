@@ -29,14 +29,14 @@ const CardCourse: React.FC<CardCourseProps> = ({ item }) => {
 
          <IonCardHeader>
             <IonCardTitle class='CardCourse--title' >{item.comercialInformation.name}</IonCardTitle>
-            <IonCardSubtitle><IonBadge>{item.comercialInformation.classDays} {item.comercialInformation.classHour}</IonBadge></IonCardSubtitle>
+            <IonCardSubtitle><IonBadge color='primary-light'>{item.comercialInformation.classDays} {item.comercialInformation.classHour}</IonBadge></IonCardSubtitle>
          </IonCardHeader>
 
          <IonCardContent color='var(--color-text-primary)' >{item.comercialInformation.description}</IonCardContent>
 
          <IonCardContent>
             <div className='CardCourse-seeMoreBtn'>
-               <IonButton style={{ width: '100%' }} routerLink={`/curso/${item._id}`} >Ver mas</IonButton>
+               <IonButton style={{ width: '100%' }} color='primary-light' routerLink={`/curso/${item._id}`} >Ver mas</IonButton>
             </div>
          </IonCardContent>
 

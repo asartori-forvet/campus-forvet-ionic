@@ -1,8 +1,11 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react'
+import { IonContent, IonPage } from '@ionic/react'
 import LoginButton from '../../components/LoginButton'
 import './Login.css'
 import Title from '../../components/Title/Title'
 import logo from '../../assets/logo/forvet_logo_white.svg'
+import { getRandom } from '../../utils/getRandom'
+import { ANIMALS_IMAGE_TEXTS } from '../../utils/animal-icons'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 export default function Login() {
 
@@ -15,7 +18,25 @@ export default function Login() {
                   <div>
                      <Title style={{ textAlign: 'center', color: 'var(--ion-color-primary-contrast' }}>Campus</Title>
                   </div>
+
                </div>
+
+               <div className='LoginPage-carousel-main-container'>
+                  <Swiper
+                     slidesPerView={1}
+                     centeredSlides
+                  >
+                     {ANIMALS_IMAGE_TEXTS.map(item => (
+                        <SwiperSlide className='LoginPage-swiper-container' key={item.image}>
+                           <div className='LoginPage-animal-item-container'>
+                              <img className='LoginPage-animal--image' src={item.image} alt="imagen de animal" />
+                              <p className='LoginPage-animal-item--text'>{getRandom(item.text)}</p>
+                           </div>
+                        </SwiperSlide>
+                     ))}
+                  </Swiper>
+               </div>
+
                <div className='LoginPage-button-container'>
                   <LoginButton />
                </div>

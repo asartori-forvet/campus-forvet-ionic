@@ -116,10 +116,17 @@ export interface Teacher {
    profilePicture: string;
 }
 
+export interface Materials {
+   _id: string;
+   name: string;
+   type: string;
+   link: string;
+}
+
 export interface LessonItem {
    academicUnits: any[]; // Puedes definir una interfaz específica para 'academicUnits' si conoces su estructura
    initDate: string;
-   materials: any[]; // Puedes definir una interfaz específica para 'materials' si conoces su estructura
+   materials: Materials[];
    moderator: Teacher;
    modules: string[]; // Puedes definir una interfaz específica para 'modules' si conoces su estructura
    name: string;
@@ -195,4 +202,6 @@ export interface AlertState {
    isOpen: boolean;
    message: string;
    status: AlertStatus;
+   header?: string;
+   subHeader?: string;
 }

@@ -73,8 +73,8 @@ export default function OwnCoursesCarousel() {
                </Swiper>
             </div>}
          <IonButton
+            color='primary-light'
             disabled={isLoading}
-            color='secondary'
             onClick={() => !error ? history.push('/mis-cursos') : setError(false)}>{!error ? 'ver todos los cursos' : 'Cargar nuevamente'}</IonButton>
 
       </div>

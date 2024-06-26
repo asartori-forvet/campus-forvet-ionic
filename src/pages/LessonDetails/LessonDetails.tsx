@@ -1,49 +1,41 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './LessonDetails.css'
-import { IonAvatar, IonBadge, IonButton, IonContent, IonIcon, IonPage, IonSpinner } from '@ionic/react'
+import { IonAvatar, IonBadge, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonModal, IonPage, IonSpinner, IonTitle, IonToolbar } from '@ionic/react'
 import SectionHeader from '../../components/SectionHeader/SectionHeader'
 import AuthContext from '../../contexts/AuthContext'
 import { useParams } from 'react-router'
 import Title from '../../components/Title/Title'
-import { calendar, videocam,  starOutline } from 'ionicons/icons'
+import { calendar, videocam, starOutline, download, fileTray } from 'ionicons/icons'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import moment from 'moment'
 import StatusBadge from '../../components/StatusBadge/StatusBadge'
 import { openUrl } from '../../utils/openUrl'
-import {  LessonItem } from '../../types/types'
+import { LessonItem } from '../../types/types'
+import MaterialModal from '../../features/LessonDetails/MaterialModal/MaterialModal'
+import LoaderFullscreen from '../../components/LoaderFullscreen/LoaderFullscreen'
+import useLessonDetails from '../../hooks/LessonDetails/useLessonDetails'
+import LessonHeader from '../../features/LessonDetails/LessonHeader/LessonHeader'
+import LessonLinks from '../../features/LessonDetails/LessonLinks/LessonLinks'
+import TeacherCarousel from '../../features/LessonDetails/TeacherCarousel/TeacherCarousel'
+import ModeratorInfo from '../../features/LessonDetails/ModeratorInfo/ModeratorInfo'
 
-interface RouteParams {
-   lessonId: string;
-}
+const fakeMaterials = [
+   {
+      _id: 'kajshdfkljasdf',
+      name: 'material de prueba',
+      link: 'https://google.com',
+      type: 'pdf'
+   }
+]
+
 
 export default function LessonDetails() {
-
-   const { authToken } = useContext(AuthContext)
-   const { lessonId }: RouteParams = useParams();
-   const [lesson, setLesson] = useState<LessonItem | null>(null)
-   const [isLoading, setIsLoading] = useState(false)
-
-
-   useEffect(() => {
-      const getLessonInfo = async () => {
-         try {
-            setIsLoading(true)
-            const response = await fetch(`http://localhost:8000/campus/class/${lessonId}`, {
-               headers: {
-                  "Content-Type": "application/json",
-                  "Authorization": `Bearer ${authToken}`
-               }
-            })
-            const data = await response.json()
-            setLesson(data)
-         } catch (error) {
-            console.log(error)
-         } finally {
-            setIsLoading(false)
-         }
-      }
-      getLessonInfo()
-   }, [lessonId, authToken])
+   const { 
+      isLoading, 
+      isModal, 
+      setIsModal,
+      lesson
+   } = useLessonDetails()
 
    return (
       <IonPage>
@@ -51,41 +43,17 @@ export default function LessonDetails() {
          <IonContent fullscreen >
             <div className='LessonDetails-wrapper-container'>
                {isLoading
-                  ? <div className='LessonDetails-spinner-container'>
-                     <IonSpinner color='primary'></IonSpinner>
-                  </div>
+                  ? < LoaderFullscreen />
                   : <>
-                     <div className='LessonDetails-header-container'>
-                        <div className='LessonDetails-header-badges-container'>
-                           {lesson?.state && < StatusBadge state={lesson?.state} />}
-                           <div className='LessonDetails-valoration-container'>
-                              <IonBadge color='success'>
-                                 <IonIcon icon={starOutline}></IonIcon>
-                                 {lesson?.rates?.valorations?.good}
-                              </IonBadge>
 
-                              <IonBadge color='danger'>
-                                 <IonIcon icon={starOutline}></IonIcon>
-                                 {lesson?.rates?.valorations?.bad}
-                              </IonBadge>
-                           </div>
-                        </div>
-                        <Title>
-                           {lesson?.name}
-                        </Title>
+                     < LessonHeader 
+                        name={lesson?.name}
+                        state={lesson?.state}
+                        valorations={lesson?.rates.valorations}
+                     />
 
-                     </div>
-
-                     {lesson?.roomUrl &&
-                        <IonButton
-                           color='primary'
-                           onClick={() => openUrl(`${lesson.roomUrl}`)}
-                        >
-                           <IonIcon style={{ marginRight: 'var(--gap-xsm)' }} slot="icon-only" icon={videocam}></IonIcon>
-                           Link de Zoom
-                        </IonButton>
-                     }
-
+                     < LessonLinks roomUrl={lesson?.roomUrl} setIsModal={setIsModal} />
+                  
                      <div>
                         <Title style={{ fontSize: '22px', textAlign: 'center' }}>
                            <IonIcon style={{ marginRight: 'var(--gap-xsm)' }} color='primary' icon={calendar}>
@@ -95,53 +63,17 @@ export default function LessonDetails() {
                         <h5 className='LessonDetails--date-text'>{moment(lesson?.initDate).format('DD-MM-YYYY')}</h5>
                      </div>
 
-                     <div>
-                        <Title style={{ fontSize: '22px', marginBottom: 'var(--gap-sm)', textAlign: 'center' }}>Profesores</Title>
-                        <Swiper
-                           slidesPerView={2}
-                           spaceBetween={0}
-                           centeredSlides
-                        >
-                           {lesson?.teachers?.map(item => (
-                              <SwiperSlide
-                                 key={item._id}
-                              >
-                                 <div className='LessonDetails-teacher-carousel-item'>
+                     < TeacherCarousel teachers={lesson?.teachers} />
 
-                                    {item.profilePicture &&
-                                       <IonAvatar className='LessonDetails-teacher-carousel--image'>
-                                          <img src={item?.profilePicture} alt={`${item?.name} ${item?.lastname}`} />
-                                       </IonAvatar>}
-                                    <h5 className='LessonDetails-teacher-carousel--name'>{`${item?.name} ${item?.lastname}`}</h5>
-                                 </div>
-                              </SwiperSlide>
-                           ))}
-                        </Swiper>
-                     </div>
-
-                     {lesson?.moderator && <div>
-                        <Title style={{ fontSize: '22px', marginBottom: 'var(--gap-sm)', textAlign: 'center' }}>Moderador</Title>
-                        <div>
-                           <div className='LessonDetails-teacher-carousel-item'>
-                              {lesson?.moderator.profilePicture &&
-                                 <IonAvatar
-                                    className='LessonDetails-teacher-carousel--image'
-                                 >
-                                    <img
-                                       src={lesson?.moderator?.profilePicture}
-                                       alt={`${lesson?.moderator?.name} ${lesson?.moderator?.lastname}`}
-                                    />
-                                 </IonAvatar>
-                              }
-                              <h5 className='LessonDetails-teacher-carousel--name'>{`${lesson?.moderator?.name} ${lesson?.moderator?.lastname}`}</h5>
-                           </div>
-                        </div>
-                     </div>}
+                     < ModeratorInfo moderator={lesson?.moderator} />
+                     
                   </>
                }
-
             </div>
          </IonContent>
+
+         < MaterialModal materials={fakeMaterials} isModal={isModal} setIsModal={setIsModal} />
+
       </IonPage>
    )
 }

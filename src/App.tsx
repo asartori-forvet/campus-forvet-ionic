@@ -29,6 +29,8 @@ import AppRoutes from "./routes/AppRoutes";
 /* Swiper */
 import 'swiper/css';
 
+import { withAuthContextProvider, withAuthContextReady } from "./contexts/AuthContext";
+
 setupIonicReact({
    mode: "md",
 });
@@ -60,4 +62,6 @@ const App: React.FC = () => {
    );
 };
 
-export default App;
+// export default App;
+const WrappedApp = withAuthContextProvider(withAuthContextReady(App));
+export default WrappedApp

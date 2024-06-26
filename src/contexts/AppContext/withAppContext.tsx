@@ -1,6 +1,7 @@
 import React, { ComponentType, ReactNode, useContext } from 'react';
 import AppContextProvider from './AppContextProvider';
 import AppContext from './AppContext';
+import LoaderFullscreen from '../../components/LoaderFullscreen/LoaderFullscreen';
 
 /**
  * Inserts UserContextProvider in the react tree
@@ -27,9 +28,7 @@ const withAppContextReady = (Component: React.ComponentType<any>): React.FC<any>
    const { isReady } = useContext(AppContext);
    
    return isReady ? <Component {...props} /> : (
-      <div style={{ height: "100%", minHeight: "95vh", display: "flex", alignItems: "center" }}>
-         {/* Loading... */}
-      </div>
+      < LoaderFullscreen />
    );
 };
 

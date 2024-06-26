@@ -35,7 +35,6 @@ const LessonCard: React.FC<LessonCardProps> = ({ lesson }) => {
                   Ver Clase
                </IonButton>
                <IonButton
-                  color='primary'
                   routerLink={`/clase/${lesson.data._id}`}
                >
                   Ver detalles

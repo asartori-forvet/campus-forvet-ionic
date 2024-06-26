@@ -8,55 +8,13 @@ import CardSkeleton from '../../components/CardSkeleton/CardSkeleton'
 import CardCourse from '../../components/CardCourse/CardCourse'
 import AppContext from '../../contexts/AppContext'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
+import useOwnCourses from '../../hooks/OwnCourses/useOwnCourses'
+import CoursesFilters from '../../features/OwnCourses/CoursesFilters/CoursesFilters'
+import NoContentCard from '../../components/NoContentCard/NoContentCard'
 
 
 export default function OwnCourses() {
-   const { courses, setCourses} = useContext(AppContext)
-   const { authToken } = useContext(AuthContext)
-   const [isLoading, setIsLoading] = useState(false)
-   const [error, setError] = useState(false)
-
-   const [filter, setFilter] = useState<{ name: string; state: string }>({
-      name: '',
-      state: 'all',
-   });
-
-   useEffect(() => {
-      const getCourses = async () => {
-         setIsLoading(true)
-         try {
-            const response = await fetch('http://localhost:8000/campus/users/courses', {
-               headers: {
-                  "Content-Type": "application/json",
-                  "Authorization": `Bearer ${authToken}`,
-               }
-            })
-            const data = await response.json()
-            if(data && setCourses){
-               setCourses(data)
-            }
-            setError(false)
-         } catch (error) {
-            console.log(error)
-            setError(true)
-         } finally {
-            setIsLoading(false)
-         }
-      }
-      if(courses === null && !error){
-         getCourses()
-      }
-   }, [authToken, courses, setCourses, error])
-
-   const filterCourses = () => {
-      return courses?.filter(course => {
-         const matchesName = course.comercialInformation.name.toLowerCase().includes(filter.name.toLowerCase());
-         const matchesState = filter.state === 'all' || course.state === filter.state;
-         return matchesName && matchesState;
-      });
-   };
-
-   const filteredCourses = filterCourses();
+   const { filteredCourses, isLoading, setFilter, error, filter } = useOwnCourses()
 
    return (
       <IonPage>
@@ -65,38 +23,11 @@ export default function OwnCourses() {
          <IonContent>
             <div className='OwnCoruses-wrapper-container'>
 
-               <div>
-                  <div className='OwnCourses-input-container'>
-                     <div className='OwnCourses-input-wrapper'>
-                        <IonInput
-                           style={{ paddingLeft: 'var(--gap-xsm)' }}
-                           color='light'
-                           clearInput={true}
-                           disabled={isLoading || error}
-                           onIonChange={({ target }) => {
-                              const value = target.value?.toString();
-                              if (value) {
-                                 setFilter(prevState => ({
-                                    ...prevState,
-                                    name: value,
-                                 }));
-                              }
-                           }}
-                           placeholder="Buscar por nombre"
-                        ></IonInput>
-                     </div>
-                  </div>
-
-                  <div className='OwnCourses-select-container'>
-                     <div className='OwnCourses-select-wrapper'>
-                        <IonSelect color='light' disabled={isLoading || error} placeholder="Buscar por estado" onIonChange={(e) => setFilter(prevState => ({ ...prevState, state: e.target.value }))}>
-                           <IonSelectOption color='light' value="all">Todas</IonSelectOption>
-                           <IonSelectOption color='light' value="Open">Abiertas</IonSelectOption>
-                           <IonSelectOption color='light' value="Closed">Cerradas</IonSelectOption>
-                        </IonSelect>
-                     </div>
-                  </div>
-               </div>
+               < CoursesFilters 
+                  error={error}
+                  setFilter={setFilter}
+                  isLoading={isLoading}   
+               />
 
                {(isLoading) &&
                   <>
@@ -119,9 +50,9 @@ export default function OwnCourses() {
                   }
 
                   {(!isLoading && filteredCourses?.length === 0) &&
-                     <IonCard>
-                        <Title style={{ fontWeight: 400, textAlign: 'center', fontSize: '22px' }}>No hay resultados para esta búsqueda</Title>
-                     </IonCard>
+                     < NoContentCard 
+                        text={`No hay resultados para: ${filter.name}`}
+                     />
                   }
                </IonList>
             </div>

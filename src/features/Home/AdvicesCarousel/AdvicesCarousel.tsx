@@ -56,8 +56,8 @@ export default function AdvicesCarousel() {
                         <SwiperSlide
                            key={item._id}
                         >
-                           <IonItem color='primary' className="AdvicesCarousel-article-main-container" >
-                              <div className="AdvicesCarousel-article-wrapper">
+                           <IonItem color='primary-light'  className="AdvicesCarousel-article-main-container" >
+                              <div color="primary.1" className="AdvicesCarousel-article-wrapper">
                                  <div className="AdvicesCarousel-article--header">
                                     {item.user.profilePicture &&
                                        <IonAvatar className="AdvicesCarousel-article--avatar">
@@ -66,7 +66,6 @@ export default function AdvicesCarousel() {
                                     }
                                     <div className="AdvicesCarousel-article--header-user-description">
                                        <h3 className="AdvicesCarousel-article--username">{item.user.name} {item.user.lastname}</h3>
-                                       {/* {item.user.type && <h4 className="AdvicesCarousel-article--type">{item.user.type}</h4>} */}
                                        {item.user.type && <IonBadge color='light' className="AdvicesCarousel-article--type">{item.user.type}</IonBadge>}
                                     </div>
                                  </div>

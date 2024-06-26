@@ -1,68 +1,38 @@
-import { IonBackButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonPage, IonSpinner, IonTitle, IonToolbar } from '@ionic/react'
-import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router'
-import AuthContext from '../../contexts/AuthContext'
-import Title from '../../components/Title/Title'
+import { IonButton, IonCard, IonCardHeader, IonCardTitle, IonContent, IonPage } from '@ionic/react'
 import SectionHeader from '../../components/SectionHeader/SectionHeader'
 import LessonCard from '../../features/CourseDetails/LessonCard/LessonCard'
 import CardSkeleton from '../../components/CardSkeleton/CardSkeleton'
-import { Course } from '../../types/types'
-
-
-interface RouteParams {
-   courseId: string;
-}
+import useCourseDetails from '../../hooks/CourseDetails/useCourseDetails'
+import NoContentCard from '../../components/NoContentCard/NoContentCard'
+import { useHistory } from 'react-router'
 
 export default function CourseDetails() {
-   const { authToken } = useContext(AuthContext)
-   const { courseId }: RouteParams = useParams();
-   const [course, setCourse] = useState<Course | null>(null);
-   const [isLoading, setIsLoading] = useState(false)
-
-   useEffect(() => {
-      const getCourseInfo = async () => {
-         try {
-            setIsLoading(true)
-            const response = await fetch(`http://localhost:8000/campus/course/${courseId}`, {
-               headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${authToken}`
-               }
-            })
-            const data = await response.json()
-
-            setCourse(data)
-
-         } catch (error) {
-            console.log(error)
-         } finally {
-            setIsLoading(false)
-
-         }
-      }
-      getCourseInfo()
-   }, [courseId, authToken])
-
+   const { isLoading, course, error, setError } = useCourseDetails()
+   const history = useHistory()
    return (
       <IonPage>
 
          < SectionHeader title={'Curso'} />
 
          <IonContent style={{ padding: 'var(--padding-app)' }} fullscreen>
-            {isLoading
-               ? < CardSkeleton />
-               : <>
+
+            {isLoading && < CardSkeleton />}
+
+            {(!isLoading && !error) &&
+               <>
                   <IonCard>
                      <img alt={course?.name} src={course?.image} />
                      <IonCardHeader>
-                        <IonCardTitle>{course?.name}</IonCardTitle>
+                        <IonCardTitle style={{ color: 'var(--color-text-secondary)', fontWeight: 700 }}>{course?.name}</IonCardTitle>
                      </IonCardHeader>
                   </IonCard>
-                  {course?.events?.length === 0 &&
-                     <IonCard>
-                        <Title style={{ fontWeight: 400, textAlign: 'center', fontSize: '22px' }}>Este curso no tiene eventos para mostrar</Title>
-                     </IonCard>
+
+                  {(!isLoading && course?.events?.length === 0) &&
+                     <div style={{marginTop: 'var(--gap-lg)'}}>
+                        < NoContentCard text='Este curso no tiene eventos para mostrar' />
+                     </div>
                   }
+
                   {(course?.events && course.events.length > 0) &&
                      course?.events?.map((lesson) => {
                         switch (lesson.type) {
@@ -83,6 +53,17 @@ export default function CourseDetails() {
                      })}
                </>
             }
+
+            {(!isLoading && error) &&
+               <div style={{width: '100%', height: '100%', display: 'grid', placeItems: 'center'}}>
+                  < NoContentCard text='Ha ocurrido un error al cargar este curso' />
+                  <div style={{display: 'flex', flexDirection: 'column', gap:'var(--gap-xsm)'}}>
+                  <IonButton color='secondary' onClick={() => setError(false)}>cargar de nuevo</IonButton>
+                  <IonButton color='primary-light' onClick={() => history.goBack()}>Volver</IonButton>
+                  </div>
+               </div>
+            }
+
          </IonContent>
 
 
