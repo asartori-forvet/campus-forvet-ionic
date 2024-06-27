@@ -10,7 +10,13 @@ interface LessonLinkProps {
 
 const LessonLinks: React.FC<LessonLinkProps> = ({roomUrl, setIsModal}) => {
    return (
-      <>
+      <div style={{
+         width: '100%', 
+         display: 'flex', 
+         flexDirection: 'column', 
+         gap: 'var(--gap-xsm)'
+         }}
+      >
          {roomUrl &&
             <IonButton
                color='primary'
@@ -28,7 +34,7 @@ const LessonLinks: React.FC<LessonLinkProps> = ({roomUrl, setIsModal}) => {
             <IonIcon style={{ marginRight: 'var(--gap-xsm)' }} color='primary' slot="icon-only" icon={fileTray}></IonIcon>
             <span style={{ color: 'var(--color-text-secondary)' }}>Materiales</span>
          </IonButton>
-      </>
+      </div>
    )
 }
 

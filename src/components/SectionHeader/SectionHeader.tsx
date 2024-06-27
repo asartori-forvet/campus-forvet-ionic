@@ -2,36 +2,30 @@ import React, { useContext, useEffect, useState } from 'react';
 import {
    IonBackButton,
    IonBadge,
-   IonButton,
    IonButtons,
-   IonContent,
    IonHeader,
    IonIcon,
-   IonModal,
-   IonTitle,
    IonToolbar,
    useIonRouter,
 } from '@ionic/react';
 import Title from '../Title/Title';
 import { notifications } from 'ionicons/icons';
-import { FAKE_NEWS } from '../../utils/fake-news';
+// import { FAKE_NEWS } from '../../utils/fake-news';
 import AuthContext from '../../contexts/AuthContext';
 import NotificationModal from '../NotificationModal/NotificationModal';
 import AppContext from '../../contexts/AppContext';
 
-// Definir un tipo para los estilos personalizados
 interface SectionHeaderStyles {
    toolbar?: React.CSSProperties;
    iconContainer?: React.CSSProperties;
    badge?: React.CSSProperties;
 }
-
 interface SectionHeaderProps {
    backTitle?: string;
    title?: string;
    withBackArrow?: boolean;
    children?: React.ReactNode;
-   styles?: SectionHeaderStyles; // Cambiado de style a styles para evitar conflictos con la propiedad style de React
+   styles?: SectionHeaderStyles;
 }
 
 export default function SectionHeader({
@@ -63,8 +57,8 @@ export default function SectionHeader({
             })
             const data = await response.json()
             if (setNotifications) {
-               // setNotifications(data)
-               setNotifications(FAKE_NEWS)
+               setNotifications(data)
+               // setNotifications(FAKE_NEWS)
             }
 
          } catch (error) {
@@ -80,8 +74,8 @@ export default function SectionHeader({
    }, [authToken, NOTIFICATIONS, setNotifications, error])
 
    const allNotifications = [
-      ...(NOTIFICATIONS?.nationality[0] ?? []),
-      ...(NOTIFICATIONS?.acaUnits[0] ?? [])
+      ...(NOTIFICATIONS?.nationality ?? []),
+      ...(NOTIFICATIONS?.acaUnits ?? [])
    ];
 
    const defaultStyles: SectionHeaderStyles = {
@@ -96,7 +90,7 @@ export default function SectionHeader({
          placeItems: 'center',
          position: 'absolute',
          right: 'var(--padding-app)',
-         top: '30px',
+         top: '40%',
       },
       badge: {
          position: 'absolute',

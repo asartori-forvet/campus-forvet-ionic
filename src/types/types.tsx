@@ -39,7 +39,6 @@ export interface UserType {
    user_id_campus: string;
    __v: number;
 }
-
 interface Price {
    usd: number;
    ars: number;
@@ -157,7 +156,7 @@ export interface LessonData {
       teachers: string[];
       _id: string;
    }
-   type: 'lessons'; // O cualquier otra cadena que uses para identificar el tipo de lección
+   type: 'lessons';
 }
 
 /* NEWS / Notificaciones */
@@ -175,9 +174,9 @@ export interface Notification {
 }
 
 export interface Notifications {
-   nationality: Notification[][];
-   general: Notification[][];
-   acaUnits: Notification[][];
+   nationality: Notification[];
+   general: Notification[];
+   acaUnits: Notification[];
 }
 
 export interface Advice {
@@ -204,4 +203,25 @@ export interface AlertState {
    status: AlertStatus;
    header?: string;
    subHeader?: string;
+}
+
+/* examens */
+export interface Exam {
+   data: {
+      name: string;
+   initDate: string;
+   endDate: string;
+   questionary?: string;
+   duration?: number;
+   tryQuantity: number;
+   approvalPercentage: number;
+   academicUnit: any[];
+   _id: string;
+   }
+   type: 'exams' | 'reExam' | 'recoveryExam';
+}
+
+export interface Animal{
+      image: string,
+      text: string[]
 }

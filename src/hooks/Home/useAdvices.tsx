@@ -21,6 +21,9 @@ export default function useAdvices() {
             })
 
             const data = await response.json()
+            if(data.error){
+               throw new Error(data.error)
+            }
             setAdvices(data)
             setError(false)
          } catch (error) {

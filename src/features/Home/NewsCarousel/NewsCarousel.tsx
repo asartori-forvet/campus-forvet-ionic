@@ -6,26 +6,30 @@ import Title from "../../../components/Title/Title";
 import { openUrl } from "../../../utils/openUrl";
 import CardSkeleton from "../../../components/CardSkeleton/CardSkeleton";
 import AppContext from "../../../contexts/AppContext";
+import NoContentCard from "../../../components/NoContentCard/NoContentCard";
 
 
 export default function NewsCarousel() {
    const { notifications } = useContext(AppContext)
-
+   console.log(notifications)
    const isLoading = notifications === null
 
    return (
       <div className="NewsCarousel-main-container">
+         <Title>Novedades</Title>
+
          {isLoading && < CardSkeleton />}
-         {notifications?.general[0] && notifications?.general[0]?.length > 0 &&
+
+         {notifications?.general && notifications?.general?.length > 0 &&
             <>
-               <Title>Novedades</Title>
+               
                <div>
                   <Swiper
                      slidesPerView={1.3}
                      spaceBetween={0}
 
                   >
-                     {notifications?.general[0]?.map(item => (
+                     {notifications?.general?.map(item => (
                         <SwiperSlide
                            key={item._id}
                         >
@@ -41,6 +45,12 @@ export default function NewsCarousel() {
                   </Swiper>
                </div>
             </>
+         }
+
+         {(!isLoading && notifications?.general && notifications?.general?.length === 0) &&
+            <div className="NewsCarousel-no-content-container">
+               < NoContentCard text="No hay novedades" />
+            </div>
          }
       </div>
    )

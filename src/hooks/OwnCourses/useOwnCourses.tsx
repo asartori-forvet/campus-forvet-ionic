@@ -25,6 +25,11 @@ export default function useOwnCourses() {
                }
             })
             const data = await response.json()
+
+            if(data.error){
+               throw new Error(data.error)
+            }
+            
             if(data && setCourses){
                setCourses(data)
             }

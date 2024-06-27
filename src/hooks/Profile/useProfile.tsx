@@ -43,6 +43,11 @@ export default function useProfile() {
          };
 
          const response = await fetch('http://localhost:8000/campus/users', options);
+
+         if(!response.ok){
+               throw new Error()
+         }
+
          const updatedUser = await response.json();
          setCurrentUser && setCurrentUser(updatedUser)
          setAlert({ isOpen: true, message: 'Tus cambios han sido guardado exitosamente. Podrás verlos reflejados ahora mismo.', status: 'success' })

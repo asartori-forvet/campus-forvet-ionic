@@ -1,14 +1,16 @@
 import { IonButton, IonCard, IonCardHeader, IonCardTitle, IonContent, IonPage } from '@ionic/react'
 import SectionHeader from '../../components/SectionHeader/SectionHeader'
 import LessonCard from '../../features/CourseDetails/LessonCard/LessonCard'
-import CardSkeleton from '../../components/CardSkeleton/CardSkeleton'
 import useCourseDetails from '../../hooks/CourseDetails/useCourseDetails'
 import NoContentCard from '../../components/NoContentCard/NoContentCard'
 import { useHistory } from 'react-router'
+import CourseDetailsSkeleton from '../../features/CourseDetails/CourseDetailsSkeleton/CourseDetailsSkeleton'
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 
 export default function CourseDetails() {
    const { isLoading, course, error, setError } = useCourseDetails()
    const history = useHistory()
+
    return (
       <IonPage>
 
@@ -16,7 +18,7 @@ export default function CourseDetails() {
 
          <IonContent style={{ padding: 'var(--padding-app)' }} fullscreen>
 
-            {isLoading && < CardSkeleton />}
+            {isLoading && < CourseDetailsSkeleton />}
 
             {(!isLoading && !error) &&
                <>
@@ -28,38 +30,36 @@ export default function CourseDetails() {
                   </IonCard>
 
                   {(!isLoading && course?.events?.length === 0) &&
-                     <div style={{marginTop: 'var(--gap-lg)'}}>
+                     <div style={{ marginTop: 'var(--gap-lg)' }}>
                         < NoContentCard text='Este curso no tiene eventos para mostrar' />
                      </div>
                   }
 
                   {(course?.events && course.events.length > 0) &&
-                     course?.events?.map((lesson) => {
-                        switch (lesson.type) {
-                           case "lessons":
-                              return <LessonCard key={lesson.data._id} lesson={lesson} />;
-                           // case "exams":
-                           //    return null
-                           // // return <ExamCard key={lesson.id} title={courseData.name} lesson={lesson}/>;
-                           // case "recoveryExam":
-                           //    return null
-                           // // return <ReExamCard key={lesson.id} title={courseData.name} lesson={lesson}/>;
-                           // //TODO: Remove "reExam" when no longer needed
-                           // case "reExam":
-                           //    return null
-                           default:
-                              return null;
-                        }
-                     })}
+                     course.events.map((lesson) => (
+                        <LessonCard
+                           key={lesson.data._id}
+                           lesson={lesson}
+                        />
+                     ))}
                </>
             }
 
             {(!isLoading && error) &&
-               <div style={{width: '100%', height: '100%', display: 'grid', placeItems: 'center'}}>
-                  < NoContentCard text='Ha ocurrido un error al cargar este curso' />
-                  <div style={{display: 'flex', flexDirection: 'column', gap:'var(--gap-xsm)'}}>
-                  <IonButton color='secondary' onClick={() => setError(false)}>cargar de nuevo</IonButton>
-                  <IonButton color='primary-light' onClick={() => history.goBack()}>Volver</IonButton>
+               <div style={{
+                  width: '100%',
+                  height: '100%',
+                  display: 'grid',
+                  placeItems: 'center',
+                  padding: 'var(--padding-app)'
+               }}
+               >
+                  <NoContentCard>
+                     < ErrorMessage text='Ha ocurrido un error al cargar este curso' />
+                  </NoContentCard>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--gap-xsm)' }}>
+                     <IonButton color='secondary' onClick={() => setError(false)}>cargar de nuevo</IonButton>
+                     <IonButton color='primary-light' onClick={() => history.goBack()}>Volver</IonButton>
                   </div>
                </div>
             }

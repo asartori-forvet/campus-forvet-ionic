@@ -44,6 +44,14 @@
    border-radius: var(--border-radius-sm);
 }
 
+.OwnCourses-select--input{
+   --placeholder-color: #fff;
+}
+
+.OwnCourses-select--input .select-icon-inner{
+   color: #fff;
+}
+
  .OwnCourses-select-container .select-custom {
    --color: var(--ion-color-primary-contrast);
  }

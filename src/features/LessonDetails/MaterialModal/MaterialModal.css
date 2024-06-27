@@ -2,29 +2,57 @@
    width: 100%;
    display: flex;
    flex-direction: column;
-   gap: var(--gap-sm);
+   gap: var(--gap-md);
    align-items: flex-start;
 }
 
 .MaterialModal-item-container{
    width: 100%;
    display: flex;
-   align-items: center;
+   align-items: flex-start;
    justify-content: space-between;
+   padding: var(--gap-sm) 0 ;
+   border-bottom: 1px solid var(--color-text-secondary);
+}
+
+.MaterialModal-item-container:first-child{
+   padding: 0 0 var(--gap-sm) 0 ;
+}
+
+.MaterialModal-item-container:last-child{
+   border-bottom: 0;
+
+}
+
+.MaterialModal-column-container{
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   justify-content: space-between;
+   gap: 4px;
 }
 
 .MaterialModal-materialName{
    font-size: var(--fs-body);
    color: var(--color-text-primary);
+   margin: 0;
 }
 
 .MaterialModal-badge-container{
-   width: 100%;
+   width: max-content;
+   padding: 6px 12px;
    background-color: var(--ion-color-tertiary);
+   font-size: var(--fs-tiny);
 }
 
 .MaterialModal-item-button-container{
    display: flex;
-   flex-direction: column;
-   align-items: center;
+   align-items: flex-start;
+   justify-content: flex-start;
+   height: 100%;
+}
+
+.MaterialModal-no-content-container{
+   width: 100%;
+   margin-top: var(--gap-lg);
 }

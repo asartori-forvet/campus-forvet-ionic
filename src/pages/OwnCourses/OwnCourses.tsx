@@ -1,4 +1,4 @@
-import {IonContent, IonList, IonPage } from '@ionic/react'
+import { IonContent, IonList, IonPage } from '@ionic/react'
 import SectionHeader from '../../components/SectionHeader/SectionHeader'
 import './OwnCourses.css'
 import CardSkeleton from '../../components/CardSkeleton/CardSkeleton'
@@ -19,10 +19,10 @@ export default function OwnCourses() {
          <IonContent>
             <div className='OwnCoruses-wrapper-container'>
 
-               < CoursesFilters 
+               < CoursesFilters
                   error={error}
                   setFilter={setFilter}
-                  isLoading={isLoading}   
+                  isLoading={isLoading}
                />
 
                {(isLoading) &&
@@ -33,7 +33,11 @@ export default function OwnCourses() {
                   </>
                }
 
-               {error && < ErrorMessage text='Error al cargar la lista de cursos' />}
+               {error &&
+                  <NoContentCard>
+                     < ErrorMessage text='Error al cargar la lista de cursos' />
+                  </NoContentCard>
+               }
 
                <IonList className='OwnCourses-cards-container'>
                   {(!isLoading && filteredCourses && filteredCourses?.length > 0) &&
@@ -46,7 +50,7 @@ export default function OwnCourses() {
                   }
 
                   {(!isLoading && filteredCourses?.length === 0) &&
-                     < NoContentCard 
+                     < NoContentCard
                         text={`No hay resultados para: ${filter.name}`}
                      />
                   }

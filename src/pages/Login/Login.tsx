@@ -6,9 +6,20 @@ import logo from '../../assets/logo/forvet_logo_white.svg'
 import { getRandom } from '../../utils/getRandom'
 import { ANIMALS_IMAGE_TEXTS } from '../../utils/animal-icons'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { Animal } from '../../types/types'
+
+function shuffleArray(array: Animal[]) {
+   return array
+     .map(value => ({ value, sort: Math.random() }))
+     .sort((a, b) => a.sort - b.sort)
+     .map(({ value }) => value);
+ }
 
 export default function Login() {
 
+
+   const shuffledAnimals = shuffleArray(ANIMALS_IMAGE_TEXTS);
+   
    return (
       <IonPage>
          <IonContent fullscreen>
@@ -18,7 +29,6 @@ export default function Login() {
                   <div>
                      <Title style={{ textAlign: 'center', color: 'var(--ion-color-primary-contrast' }}>Campus</Title>
                   </div>
-
                </div>
 
                <div className='LoginPage-carousel-main-container'>
@@ -26,7 +36,7 @@ export default function Login() {
                      slidesPerView={1}
                      centeredSlides
                   >
-                     {ANIMALS_IMAGE_TEXTS.map(item => (
+                     {shuffledAnimals.map(item => (
                         <SwiperSlide className='LoginPage-swiper-container' key={item.image}>
                            <div className='LoginPage-animal-item-container'>
                               <img className='LoginPage-animal--image' src={item.image} alt="imagen de animal" />

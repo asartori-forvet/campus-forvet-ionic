@@ -14,6 +14,8 @@ export default function useLessonDetails() {
    const [lesson, setLesson] = useState<LessonItem | null>(null)
    const [isLoading, setIsLoading] = useState(false)
    const [isModal, setIsModal] = useState(false)
+   const [error, setError] = useState(false)
+
 
    useEffect(() => {
       const getLessonInfo = async () => {
@@ -26,9 +28,14 @@ export default function useLessonDetails() {
                }
             })
             const data = await response.json()
+            if(data.error){
+               throw new Error(data.error)
+            }
+            setError(false)
             setLesson(data)
          } catch (error) {
             console.log(error)
+            setError(true)
          } finally {
             setIsLoading(false)
          }
@@ -37,6 +44,6 @@ export default function useLessonDetails() {
    }, [lessonId, authToken])
 
   return {
-   lesson, isLoading, isModal, setIsModal
+   lesson, isLoading, isModal, setIsModal, error
   }
 }

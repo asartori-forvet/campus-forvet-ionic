@@ -5,8 +5,8 @@ import AuthContext from '../../contexts/AuthContext'
 export default function useOwnCoursesHome() {
    const { courses, setCourses } = useContext(AppContext)
    const { authToken } = useContext(AuthContext)
-   const [ isLoading, setIsLoading ] = useState(false)
-   const [ error, setError ] = useState(false)
+   const [isLoading, setIsLoading] = useState(false)
+   const [error, setError] = useState(false)
 
    useEffect(() => {
       const getCourses = async () => {
@@ -20,6 +20,9 @@ export default function useOwnCoursesHome() {
                }
             })
             const data = await response.json()
+            if (data.error) {
+               throw new Error(data.error)
+            }
             if (data && setCourses) {
                setCourses(data)
                setError(false)
@@ -39,8 +42,8 @@ export default function useOwnCoursesHome() {
 
    return {
       isLoading,
-      error, 
-      setError, 
-      courses, 
+      error,
+      setError,
+      courses,
    }
 }

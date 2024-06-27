@@ -11,22 +11,32 @@ import LessonLinks from '../../features/LessonDetails/LessonLinks/LessonLinks'
 import TeacherCarousel from '../../features/LessonDetails/TeacherCarousel/TeacherCarousel'
 import ModeratorInfo from '../../features/LessonDetails/ModeratorInfo/ModeratorInfo'
 import { calendar } from 'ionicons/icons'
+import NoContentCard from '../../components/NoContentCard/NoContentCard'
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
+import LessonDetailsSkeleton from '../../features/LessonDetails/LessonDetailsSkeleton/LessonDetailsSkeleton'
 
-const fakeMaterials = [
-   {
-      _id: 'kajshdfkljasdf',
-      name: 'material de prueba',
-      link: 'https://google.com',
-      type: 'pdf'
-   }
-]
+// const fakeMaterials = [
+//    {
+//       _id: 'kajshdfkljasdf',
+//       name: 'Este es un material de prueba un poco mas alrgbo - Antonino Sartori',
+//       link: 'https://google.com',
+//       type: 'doc'
+//    },
+//    {
+//       _id: 'Clase 3, esto es porque creo que los nombres son bastentes largos che ',
+//       name: 'material de prueba',
+//       link: 'https://google.com',
+//       type: 'pdf'
+//    }
+// ]
 
 export default function LessonDetails() {
-   const { 
-      isLoading, 
-      isModal, 
+   const {
+      isLoading,
+      isModal,
       setIsModal,
-      lesson
+      lesson,
+      error
    } = useLessonDetails()
 
    return (
@@ -34,18 +44,24 @@ export default function LessonDetails() {
          < SectionHeader title="Clase" />
          <IonContent fullscreen >
             <div className='LessonDetails-wrapper-container'>
-               {isLoading
-                  ? < LoaderFullscreen />
-                  : <>
+               {isLoading && < LessonDetailsSkeleton />}
 
-                     < LessonHeader 
+               {(!isLoading && error) && 
+                  <NoContentCard>
+                     < ErrorMessage text='Ha ocurrido un error al cargar la clase' />
+                  </NoContentCard>
+               } 
+
+               {(!isLoading && !error) &&
+                  <>
+                     < LessonHeader
                         name={lesson?.name}
                         state={lesson?.state}
                         valorations={lesson?.rates.valorations}
                      />
 
                      < LessonLinks roomUrl={lesson?.roomUrl} setIsModal={setIsModal} />
-                  
+
                      <div>
                         <Title style={{ fontSize: '22px', textAlign: 'center' }}>
                            <IonIcon style={{ marginRight: 'var(--gap-xsm)' }} color='primary' icon={calendar}>
@@ -58,13 +74,12 @@ export default function LessonDetails() {
                      < TeacherCarousel teachers={lesson?.teachers} />
 
                      < ModeratorInfo moderator={lesson?.moderator} />
-                     
                   </>
                }
             </div>
          </IonContent>
 
-         < MaterialModal materials={fakeMaterials} isModal={isModal} setIsModal={setIsModal} />
+         < MaterialModal materials={lesson?.materials} isModal={isModal} setIsModal={setIsModal} />
 
       </IonPage>
    )

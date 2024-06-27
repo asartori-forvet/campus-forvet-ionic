@@ -2,8 +2,9 @@ import React from 'react'
 import './MaterialModal.css'
 import { IonBadge, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonModal, IonTitle, IonToolbar } from '@ionic/react'
 import { openUrl } from '../../../utils/openUrl'
-import { download,  } from 'ionicons/icons'
+import { downloadSharp } from 'ionicons/icons'
 import { Materials } from '../../../types/types'
+import NoContentCard from '../../../components/NoContentCard/NoContentCard'
 
 
 interface MaterialModalProps {
@@ -12,7 +13,11 @@ interface MaterialModalProps {
    materials?: Materials[];
 }
 
-const MaterialModal: React.FC<MaterialModalProps> = ({ isModal, setIsModal, materials }) => {
+const MaterialModal: React.FC<MaterialModalProps> = ({ 
+   isModal, 
+   setIsModal, 
+   materials 
+}) => {
 
    return (
       <IonModal isOpen={isModal}>
@@ -28,19 +33,23 @@ const MaterialModal: React.FC<MaterialModalProps> = ({ isModal, setIsModal, mate
             {materials && materials.length > 0
                ? materials.map(material => (
                   <div key={material._id} className='MaterialModal-item-container'>
-                     <h5 className='MaterialModal-materialName'>{material?.name}</h5>
+                     <div className='MaterialModal-column-container'>
+                        <h5 className='MaterialModal-materialName'>{material?.name}</h5>
+                        <IonBadge className='MaterialModal-badge-container'>.{material?.type}</IonBadge>
+                     
+                     </div>
+
                      <div className='MaterialModal-item-button-container'>
-                        <IonBadge className='MaterialModal-badge-container'>{material?.type}</IonBadge>
                         <IonButton 
                            onClick={() => openUrl(material?.link)}
                            >
-                              <IonIcon icon={download}></IonIcon>
+                              <IonIcon icon={downloadSharp}></IonIcon>
                         </IonButton>
                      </div>
                   </div>
                ))
-               : <div>
-                  <p>Esta clase no tiene materiales para descargar</p>
+               : <div className='MaterialModal-no-content-container'>
+                  < NoContentCard text='Esta clase no tiene materiales para descargar' />
                </div>
             }
          </IonContent>

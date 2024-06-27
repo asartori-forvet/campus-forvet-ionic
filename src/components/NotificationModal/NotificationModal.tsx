@@ -4,6 +4,7 @@ import './NotificationModal.css'
 import { notificationsCircleOutline } from 'ionicons/icons'
 import CardSkeleton from '../CardSkeleton/CardSkeleton'
 import { Notification } from '../../types/types'
+import NoContentCard from '../NoContentCard/NoContentCard'
 
 interface NotificationModalProps {
    isOpen: boolean;
@@ -57,8 +58,8 @@ interface NotificationModalProps {
                   ))}
                </div>
             ) : (
-               <div>
-                  <p>No hay notificaciones</p>
+               <div className='NotificationModal-no-content-container'>
+                  < NoContentCard text='No hay notificaciones' />
                </div>
             )}
          </IonContent>

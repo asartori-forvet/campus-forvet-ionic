@@ -12,7 +12,12 @@ interface CoursesFiltersProps {
    setFilter: React.Dispatch<React.SetStateAction<FilterState>>;
 }
 
-const CoursesFilters: React.FC<CoursesFiltersProps> = ({isLoading, error, setFilter}) => {
+const CoursesFilters: React.FC<CoursesFiltersProps> = ({ 
+   isLoading, 
+   error, 
+   setFilter 
+}) => {
+
    return (
       <div>
          <div className='OwnCourses-input-container'>
@@ -38,10 +43,39 @@ const CoursesFilters: React.FC<CoursesFiltersProps> = ({isLoading, error, setFil
 
          <div className='OwnCourses-select-container'>
             <div className='OwnCourses-select-wrapper'>
-               <IonSelect color='light' disabled={isLoading || error} placeholder="Buscar por estado" onIonChange={(e) => setFilter(prevState => ({ ...prevState, state: e.target.value }))}>
-                  <IonSelectOption color='light' value="all">Todas</IonSelectOption>
-                  <IonSelectOption color='light' value="Open">Abiertas</IonSelectOption>
-                  <IonSelectOption color='light' value="Closed">Cerradas</IonSelectOption>
+               <IonSelect
+                  className='OwnCourses-select--input'
+                  color='light'
+                  disabled={isLoading || error}
+                  placeholder="Buscar por estado"
+                  okText="Buscar" 
+                  cancelText="Cancelar"
+                  onIonChange={(e) => setFilter(
+                     prevState => ({
+                        ...prevState, state: e.target.value
+                     }))}
+               >
+                  <IonSelectOption
+                     color='light'
+                     value="all"
+                  >
+                     Todas
+                  </IonSelectOption>
+
+                  <IonSelectOption
+                     color='light'
+                     value="Open"
+                  >
+                     Abiertas
+                  </IonSelectOption>
+
+                  <IonSelectOption
+                     color='light'
+                     value="Closed"
+                  >
+                     Cerradas
+                  </IonSelectOption>
+
                </IonSelect>
             </div>
          </div>
