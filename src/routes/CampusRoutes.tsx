@@ -11,7 +11,7 @@ import { IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } 
 import { home, person, school } from 'ionicons/icons';
 import Alert from '../components/Alert/Alert';
 
-const CampusRoutes: React.FC = () => {
+const CampusRoutes = () => {
    // const {canGoBack} = useIonRouter()
    // const canBack = canGoBack()
 

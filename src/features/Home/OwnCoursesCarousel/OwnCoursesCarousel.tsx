@@ -2,10 +2,10 @@ import { IonButton, IonItem } from "@ionic/react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import './OwnCoursesCarousel.css'
 import Title from "../../../components/Title/Title";
-import CardSkeleton from "../../../components/CardSkeleton/CardSkeleton";
 import { useHistory } from "react-router";
 import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
 import useOwnCoursesHome from "../../../hooks/Home/useOwnCoursesHome";
+import CarouselWithCardsSkeleton from "../CarouselWithCardsSkeleton/CarouselWithCardsSkeleton";
 
 export default function OwnCoursesCarousel() {
    const { courses, error, setError, isLoading } = useOwnCoursesHome() 
@@ -15,7 +15,7 @@ export default function OwnCoursesCarousel() {
       <div className="OwnCoursesCarousel-main-container">
          <Title >Mis cursos</Title>
          {(isLoading) &&
-            < CardSkeleton />
+            < CarouselWithCardsSkeleton  />
          }
          {error && < ErrorMessage text='Ha ocurrido un error al cargar los cursos' />}
          {courses && courses?.length > 0 &&

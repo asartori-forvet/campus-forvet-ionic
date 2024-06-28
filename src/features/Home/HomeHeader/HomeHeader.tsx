@@ -24,7 +24,7 @@ export default function HomeHeader() {
                   <IonAvatar onClick={() => push('/perfil')}>
                      <img src={currentUser?.profilePicture} alt={`${currentUser?.name} ${currentUser?.lastname}`} />
                   </IonAvatar>
-                  <Title style={{ color: '#fff', fontSize: 'var(--fs-body)', width: 'max-content' }}>{`Hola de nuevo, ${currentUser?.name}`}</Title>
+                  <Title style={{ color: '#fff', fontSize: 'var(--fs-body)', width: 'max-content', margin: 0 }}>{`Hola de nuevo, ${currentUser?.name}`}</Title>
                </div>
             </SectionHeader>
          }

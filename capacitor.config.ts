@@ -1,10 +1,29 @@
-import { CapacitorConfig } from "@capacitor/cli";
+/* import { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
   appId: "com.auth0.samples",
   appName: "Auth0 Samples",
   webDir: "build",
   plugins: {},
+};
+
+export default config;
+ */
+
+import { CapacitorConfig } from "@capacitor/cli";
+
+const config: CapacitorConfig = {
+  appId: "com.auth0.samples",
+  appName: "Auth0 Samples",
+  webDir: "build",
+  plugins: {
+    CapacitorAuth0Plugin: {
+      clientId: 'lcsDgYGqA9SYiqyN27YDqyUYYkj2WEs2',
+      domain: 'dev-x4bnrzmf2tg40xyh.us.auth0.com',
+      scheme: 'com.auth0.samples',
+      redirectUri: 'com.auth0.samples://dev-x4bnrzmf2tg40xyh.us.auth0.com/capacitor/com.auth0.samples/callback',
+    },
+  },
 };
 
 export default config;

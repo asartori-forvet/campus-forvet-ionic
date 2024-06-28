@@ -10,7 +10,6 @@ import {
 } from '@ionic/react';
 import Title from '../Title/Title';
 import { notifications } from 'ionicons/icons';
-// import { FAKE_NEWS } from '../../utils/fake-news';
 import AuthContext from '../../contexts/AuthContext';
 import NotificationModal from '../NotificationModal/NotificationModal';
 import AppContext from '../../contexts/AppContext';
@@ -58,7 +57,6 @@ export default function SectionHeader({
             const data = await response.json()
             if (setNotifications) {
                setNotifications(data)
-               // setNotifications(FAKE_NEWS)
             }
 
          } catch (error) {

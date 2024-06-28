@@ -1,16 +1,22 @@
 import { IonContent, IonList, IonPage } from '@ionic/react'
 import SectionHeader from '../../components/SectionHeader/SectionHeader'
 import './OwnCourses.css'
-import CardSkeleton from '../../components/CardSkeleton/CardSkeleton'
 import CardCourse from '../../components/CardCourse/CardCourse'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import useOwnCourses from '../../hooks/OwnCourses/useOwnCourses'
 import CoursesFilters from '../../features/OwnCourses/CoursesFilters/CoursesFilters'
 import NoContentCard from '../../components/NoContentCard/NoContentCard'
+import OwnCoursesSkeleton from '../../features/OwnCourses/OwnCoursesSkeleton/OwnCoursesSkeleton'
 
 
 export default function OwnCourses() {
-   const { filteredCourses, isLoading, setFilter, error, filter } = useOwnCourses()
+   const {
+      filteredCourses,
+      setFilter,
+      isLoading,
+      error,
+      filter
+   } = useOwnCourses();
 
    return (
       <IonPage>
@@ -25,13 +31,7 @@ export default function OwnCourses() {
                   isLoading={isLoading}
                />
 
-               {(isLoading) &&
-                  <>
-                     < CardSkeleton />
-                     < CardSkeleton />
-                     < CardSkeleton />
-                  </>
-               }
+               {isLoading && < OwnCoursesSkeleton />}
 
                {error &&
                   <NoContentCard>

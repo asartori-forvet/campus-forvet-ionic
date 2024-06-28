@@ -4,30 +4,35 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import './NewsCarousel.css'
 import Title from "../../../components/Title/Title";
 import { openUrl } from "../../../utils/openUrl";
-import CardSkeleton from "../../../components/CardSkeleton/CardSkeleton";
 import AppContext from "../../../contexts/AppContext";
 import NoContentCard from "../../../components/NoContentCard/NoContentCard";
+import CarouselWithCardsSkeleton from "../CarouselWithCardsSkeleton/CarouselWithCardsSkeleton";
 
 
 export default function NewsCarousel() {
    const { notifications } = useContext(AppContext)
-   console.log(notifications)
+   
    const isLoading = notifications === null
 
    return (
       <div className="NewsCarousel-main-container">
          <Title>Novedades</Title>
 
-         {isLoading && < CardSkeleton />}
+         {isLoading &&
+            < CarouselWithCardsSkeleton
+               withText={false}
+               cardHeight="200px"
+               cardWidth="200px"
+            />
+         }
 
          {notifications?.general && notifications?.general?.length > 0 &&
             <>
-               
+
                <div>
                   <Swiper
                      slidesPerView={1.3}
                      spaceBetween={0}
-
                   >
                      {notifications?.general?.map(item => (
                         <SwiperSlide

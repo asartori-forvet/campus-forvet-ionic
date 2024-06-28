@@ -8,6 +8,7 @@
 .NewsCarousel-article {
    position: relative;
    width: 100%;
+   max-width: 200px;
 }
 
 .NewsCarousel-article--image {

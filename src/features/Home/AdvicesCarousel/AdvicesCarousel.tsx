@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { IonAvatar, IonBadge, IonItem } from "@ionic/react";
 import './AdvicesCarousel.css'
 import useAdvices from "../../../hooks/Home/useAdvices";
+import AdvicesCardSkeleton from "./AdvicesCardSkeleton";
 
 
 export default function AdvicesCarousel() {
@@ -11,7 +12,8 @@ export default function AdvicesCarousel() {
 
    return (
       <div className="AdvicesCarousel-main-container">
-         {isLoading && < CardSkeleton />}
+         {isLoading && < AdvicesCardSkeleton />}
+
          {advices && advices?.length > 0 &&
             <>
                <Title>Consejos</Title>
